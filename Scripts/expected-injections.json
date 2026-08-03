@@ -5,7 +5,13 @@
       "Core"
     ],
     "modPackageId": "shunter.archotechthumb",
-    "modName": "Archotech Thumb"
+    "modName": "Archotech Thumb",
+    "activeMods": [
+      "brrainz.harmony",
+      "ludeon.rimworld",
+      "shunter.archotechthumb",
+      "shunter.l10nprobe"
+    ]
   },
   "defInjections": {
     "AbilityDef": {
