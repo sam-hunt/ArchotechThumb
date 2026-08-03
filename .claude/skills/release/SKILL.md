@@ -34,14 +34,41 @@ Work through each step below **one at a time**, confirming with the user before 
 - Omit chore/version-bump commits from the changelog
 - **Present the draft to the user and ask them to confirm or edit**
 
-### 3. Update CHANGELOG.md
+### 3. Refresh translation expectations and check freshness
+
+Run, in order:
+```bash
+python3 Scripts/refresh-translation-expectations.py
+python3 Scripts/check-translations.py --strict
+```
+
+- The refresh script refuses to start while RimWorld is already open (it
+  needs an exclusive boot for the mod-list swap). If it reports that, **stop
+  and ask the user** to close the client, and rerun only after they confirm
+  it is free.
+- The first command regenerates `Scripts/expected-injections.json` by
+  launching the local RimWorld client with `-l10nprobe` (graphical boot,
+  ~1-2 min; the L10nProbe dev mod dumps every DefInjected key the live game
+  expects, then quits). This is what surfaces vanilla-inherited and
+  C#-default strings a def-XML scan cannot see. Report its diff summary.
+- If the diff shows **added or changed keys**, translate them in every
+  language now (the `translate` skill's update pass), then rerun the checker.
+- Report the per-language checker result (missing keys, stale entries,
+  errors). CI's release gate runs the same script without `--strict` against
+  the checked-in sidecar; the stricter local run surfaces warnings while
+  there is still time to act on them.
+- If the sidecar or any translations changed, commit them as their own
+  `fix(l10n)` commit (show the diff and **ask the user to confirm**) before
+  moving on — step 7 stages only the version-bump files.
+
+### 4. Update CHANGELOG.md
 
 - Add a new `## [X.Y.Z] - YYYY-MM-DD` section at the top (below the header), using today's date
 - Use the confirmed changelog notes from step 2, formatted in Keep a Changelog style (`### Added`, `### Fixed`, etc.)
 - Add a `[X.Y.Z]` link reference at the bottom of the file
 - Show the diff and **ask the user to confirm**
 
-### 4. Bump versions
+### 5. Bump versions
 
 Update the version string in all three files:
 - `About/About.xml` — `<modVersion>`
@@ -50,7 +77,7 @@ Update the version string in all three files:
 
 Show the diff and **ask the user to confirm** the changes look correct.
 
-### 5. Build and deploy
+### 6. Build and deploy
 
 Run:
 ```bash
@@ -61,7 +88,7 @@ The post-build `StageMod` target atomically wipes and re-stages the deployed mod
 
 Report the build result. If the build fails, stop and help the user fix it. **Ask the user to confirm** before proceeding to commit.
 
-### 6. Stage, commit, tag
+### 7. Stage, commit, tag
 
 - Stage only the release files: `About/About.xml`, `Source/1.6/Properties/AssemblyInfo.cs`, `README.md`, `CHANGELOG.md`
 - If there are other modified tracked files, list them and ask the user whether to include them
@@ -70,7 +97,7 @@ Report the build result. If the build fails, stop and help the user fix it. **As
 - Show `git log --oneline -3` and `git tag -l 'v*' --sort=-v:refname | head -5`
 - **Ask the user to confirm** before pushing
 
-### 7. Push
+### 8. Push
 
 ```bash
 git push && git push --tags
