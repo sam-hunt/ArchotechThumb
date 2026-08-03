@@ -1,0 +1,65 @@
+{
+  "meta": {
+    "gameBuild": "1.6.4871 rev591",
+    "activeDlcs": [
+      "Core"
+    ],
+    "modPackageId": "shunter.archotechthumb",
+    "modName": "Archotech Thumb"
+  },
+  "defInjections": {
+    "AbilityDef": {
+      "AT_OrbitalBeamStrike.description": {
+        "english": "Call down a power beam from a derelict orbital satellite onto the chosen location. The beam ignites everything in a wide radius and inflicts massive flame damage. The archotech thumb's uplink takes time to recharge between strikes.",
+        "required": true
+      },
+      "AT_OrbitalBeamStrike.label": {
+        "english": "orbital beam strike",
+        "required": true
+      }
+    },
+    "HediffDef": {
+      "AT_ArchotechThumb.comps.HediffComp_VerbGiver.tools.fist.label": {
+        "english": "fist",
+        "required": true,
+        "normalized": "AT_ArchotechThumb.comps.0.tools.0.label"
+      },
+      "AT_ArchotechThumb.description": {
+        "english": "An installed archotech thumb. Despite its modest size it conceals an archotech subpersona, an array of forbidden communications hardware, and a direct uplink to a derelict orbital weapon platform. With a thought, the wearer can call down a column of solar fire from the heavens. Like other archotech parts, it looks and feels like natural flesh, is harder to damage than plasteel, and repairs itself over time.",
+        "required": true
+      },
+      "AT_ArchotechThumb.label": {
+        "english": "archotech thumb",
+        "required": true
+      },
+      "AT_ArchotechThumb.labelNoun": {
+        "english": "an archotech thumb",
+        "required": true
+      }
+    },
+    "RecipeDef": {
+      "AT_InstallArchotechThumb.description": {
+        "english": "Install an archotech thumb.",
+        "required": true
+      },
+      "AT_InstallArchotechThumb.jobString": {
+        "english": "Installing archotech thumb.",
+        "required": true
+      },
+      "AT_InstallArchotechThumb.label": {
+        "english": "install archotech thumb",
+        "required": true
+      }
+    },
+    "ThingDef": {
+      "AT_ArchotechThumb.description": {
+        "english": "An artificial thumb built by an archotech. Inside its tiny shell sits a subpersona AI, a bank of forbidden uplink antennae, and a permanent handshake with a long-forgotten orbital weapon platform. Once installed, the wearer can call down a power beam from orbit at will. Like other archotech parts, it is harder to damage than plasteel and repairs itself over time.",
+        "required": true
+      },
+      "AT_ArchotechThumb.label": {
+        "english": "archotech thumb",
+        "required": true
+      }
+    }
+  }
+}
