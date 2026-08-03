@@ -5,10 +5,8 @@ using Verse;
 
 namespace ArchotechThumb;
 
-/// <summary>
-/// Mod entry point. Registers settings, applies Harmony patches, and exposes
-/// the singleton mod instance for cross-component access.
-/// </summary>
+// Mod entry point. Registers settings, applies Harmony patches, and exposes
+// the singleton mod instance for cross-component access.
 public class ArchotechThumbMod : Mod
 {
     public static ArchotechThumbMod Instance { get; private set; }
@@ -35,10 +33,8 @@ public class ArchotechThumbMod : Mod
         ApplyOrbitalBeamCooldown();
     }
 
-    /// <summary>
-    /// Push the configured cooldown onto the orbital beam ability def. Called at
-    /// startup once defs are loaded and again whenever the user changes settings.
-    /// </summary>
+    // Push the configured cooldown onto the orbital beam ability def. Called at
+    // startup once defs are loaded and again whenever the user changes settings.
     public void ApplyOrbitalBeamCooldown()
     {
         var def = DefDatabase<AbilityDef>.GetNamedSilentFail("AT_OrbitalBeamStrike");
