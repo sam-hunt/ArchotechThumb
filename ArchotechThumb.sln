@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.6", "1.6", "{16000000-000
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchotechThumb", "Source\1.6\ArchotechThumb.csproj", "{B2C3D4E5-F6A7-8901-BC23-DE45FA678901}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchotechThumb.Tests", "Tests\1.6\ArchotechThumb.Tests.csproj", "{EF2045A1-72C6-48D8-AF57-AEEB4C910DB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +19,16 @@ Global
 		{B2C3D4E5-F6A7-8901-BC23-DE45FA678901}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2C3D4E5-F6A7-8901-BC23-DE45FA678901}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2C3D4E5-F6A7-8901-BC23-DE45FA678901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF2045A1-72C6-48D8-AF57-AEEB4C910DB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF2045A1-72C6-48D8-AF57-AEEB4C910DB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF2045A1-72C6-48D8-AF57-AEEB4C910DB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF2045A1-72C6-48D8-AF57-AEEB4C910DB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B2C3D4E5-F6A7-8901-BC23-DE45FA678901} = {16000000-0000-0000-0000-000000000000}
+		{EF2045A1-72C6-48D8-AF57-AEEB4C910DB0} = {16000000-0000-0000-0000-000000000000}
 	EndGlobalSection
 EndGlobal
