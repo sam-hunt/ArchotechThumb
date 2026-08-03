@@ -96,7 +96,7 @@
       <PatchFiles Include="$(MSBuildProjectDirectory)/../../1.6/Patches/**/*" />
       <LoadFoldersFile Include="$(MSBuildProjectDirectory)/../../LoadFolders.xml" />
       <TextureFiles Include="$(MSBuildProjectDirectory)/../../Textures/**/*" />
-      <LanguageFiles Include="$(MSBuildProjectDirectory)/../../Languages/**/*" />
+      <LanguageFiles Include="$(MSBuildProjectDirectory)/../../1.6/Languages/**/*" />
     </ItemGroup>
     <Copy SourceFiles="@(AboutFiles)" DestinationFiles="@(AboutFiles->'$(ModDeployPath)/About/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(AssemblyFiles)" DestinationFiles="@(AssemblyFiles->'$(ModDeployPath)/1.6/Assemblies/%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
@@ -104,6 +104,6 @@
     <Copy SourceFiles="@(PatchFiles)" DestinationFiles="@(PatchFiles->'$(ModDeployPath)/1.6/Patches/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(LoadFoldersFile)" DestinationFolder="$(ModDeployPath)" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(TextureFiles)" DestinationFiles="@(TextureFiles->'$(ModDeployPath)/Textures/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
-    <Copy SourceFiles="@(LanguageFiles)" DestinationFiles="@(LanguageFiles->'$(ModDeployPath)/Languages/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(LanguageFiles)" DestinationFiles="@(LanguageFiles->'$(ModDeployPath)/1.6/Languages/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
   </Target>
 </Project>
