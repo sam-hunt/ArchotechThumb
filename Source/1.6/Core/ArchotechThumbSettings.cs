@@ -14,6 +14,14 @@ public class ArchotechThumbSettings : ModSettings
 
     public int OrbitalBeamCooldownTicks => orbitalBeamCooldownDays * TicksPerDay;
 
+    private Vector2 scrollPosition;
+    private float contentHeight;
+
+    public void ResetToDefaults()
+    {
+        orbitalBeamCooldownDays = DefaultCooldownDays;
+    }
+
     public override void ExposeData()
     {
         base.ExposeData();
@@ -22,17 +30,48 @@ public class ArchotechThumbSettings : ModSettings
 
     public void DoWindowContents(Rect inRect)
     {
+        const float buttonHeight = 30f;
+        const float buttonGap = 10f;
+        Rect viewRect = new Rect(inRect.x, inRect.y, inRect.width, inRect.height - buttonHeight - buttonGap);
+        Rect buttonRect = new Rect(inRect.x, inRect.yMax - buttonHeight, 200f, buttonHeight);
+
+        // Self-measuring scroll view: innerRect height comes from the previous
+        // frame's CurHeight, so a scrollbar only appears once content overflows.
+        float innerWidth = viewRect.width - 16f;
+        Rect innerRect = new Rect(0f, 0f, innerWidth, Mathf.Max(contentHeight, viewRect.height));
+        Widgets.BeginScrollView(viewRect, ref scrollPosition, innerRect);
+
         var listing = new Listing_Standard();
-        listing.Begin(inRect);
+        listing.Begin(new Rect(0f, 0f, innerWidth - 8f, 99999f));
 
-        listing.Label(
-            "ArchotechThumb_OrbitalBeamCooldown".Translate(orbitalBeamCooldownDays),
-            tooltip: "ArchotechThumb_OrbitalBeamCooldown_Tip".Translate());
-        orbitalBeamCooldownDays = (int)listing.Slider(
-            orbitalBeamCooldownDays,
-            MinCooldownDays,
-            MaxCooldownDays);
+        orbitalBeamCooldownDays = SliderRow(listing,
+            "ArchotechThumb_OrbitalBeamCooldown", "ArchotechThumb_OrbitalBeamCooldownDesc",
+            orbitalBeamCooldownDays, DefaultCooldownDays,
+            MinCooldownDays, MaxCooldownDays);
 
+        contentHeight = listing.CurHeight;
         listing.End();
+        Widgets.EndScrollView();
+
+        if (Widgets.ButtonText(buttonRect, "ArchotechThumb_ResetToDefaults".Translate()))
+        {
+            ResetToDefaults();
+        }
+    }
+
+    // House-style slider row: label carries the current value plus a "(default)"
+    // suffix while at the shipped default, description as hover tooltip. Returns
+    // the slider value snapped to step, measured from min.
+    private static int SliderRow(Listing_Standard listing, string labelKey, string descKey,
+        int value, int defaultValue, int min, int max, int step = 1)
+    {
+        string label = labelKey.Translate(value);
+        if (value == defaultValue)
+        {
+            label += "ArchotechThumb_DefaultSuffix".Translate();
+        }
+        listing.Label(label, tooltip: descKey.Translate(defaultValue));
+        float raw = listing.Slider(value, min, max);
+        return Mathf.RoundToInt((raw - min) / step) * step + min;
     }
 }

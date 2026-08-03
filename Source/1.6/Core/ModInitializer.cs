@@ -23,7 +23,7 @@ public class ArchotechThumbMod : Mod
         Log.Message($"[Archotech Thumb] Initialized with {harmony.GetPatchedMethods().EnumerableCount()} patches.");
     }
 
-    public override string SettingsCategory() => "Archotech Thumb";
+    public override string SettingsCategory() => "ArchotechThumb_SettingsCategory".Translate();
 
     public override void DoSettingsWindowContents(Rect inRect) => Settings.DoWindowContents(inRect);
 

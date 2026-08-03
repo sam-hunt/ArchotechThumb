@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
+  <ArchotechThumb_SettingsCategory>Archotech Thumb</ArchotechThumb_SettingsCategory>
+
   <ArchotechThumb_OrbitalBeamCooldown>Orbital beam strike cooldown: {0} days</ArchotechThumb_OrbitalBeamCooldown>
-  <ArchotechThumb_OrbitalBeamCooldown_Tip>How long the archotech thumb's orbital uplink takes to recharge between strikes. 0 disables the cooldown entirely.</ArchotechThumb_OrbitalBeamCooldown_Tip>
+  <ArchotechThumb_OrbitalBeamCooldownDesc>How long the archotech thumb's orbital uplink takes to recharge between strikes. 0 disables the cooldown entirely. Default: {0} days.</ArchotechThumb_OrbitalBeamCooldownDesc>
+
+  <ArchotechThumb_DefaultSuffix> (default)</ArchotechThumb_DefaultSuffix>
+  <ArchotechThumb_ResetToDefaults>Reset to defaults</ArchotechThumb_ResetToDefaults>
 
 </LanguageData>
