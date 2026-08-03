@@ -17,18 +17,15 @@ dotnet build ArchotechThumb.sln -c Release
 # Build only the main project
 dotnet build Source/1.6/ArchotechThumb.csproj
 
-# Clean build + deploy (removes stale files, rebuilds, redeploys)
-./Scripts/clean-build.sh
-
-# Clean deployed mod folder (use when Defs/Patches are renamed or deleted)
-dotnet build Source/1.6/ArchotechThumb.csproj -t:CleanModFolder
+# Stage the mod files only (atomic wipe+recopy; use when Defs/Patches are renamed or deleted)
+dotnet build Source/1.6/ArchotechThumb.csproj -t:StageMod
 ```
 
 The build system auto-detects the RimWorld installation path on Windows/Linux/Mac (including WSL targeting a Windows install). For CI builds without RimWorld installed, it falls back to the `Krafs.Rimworld.Ref` NuGet package.
 
 ### Deployment
 
-The repo lives in `~/dev/ArchotechThumb`, separate from the RimWorld Mods folder. A post-build MSBuild target (`DeployToModFolder`) automatically copies runtime files to `$RIMWORLD_PATH/Mods/ArchotechThumb/`. The `Scripts/clean-build.sh` script performs a full clean build + deploy cycle and is also run automatically via a Claude Code Stop hook after each conversation turn.
+The repo lives in `~/dev/ArchotechThumb`, separate from the RimWorld Mods folder. The csproj's `StageMod` target is the **single source of truth** for what files ship: its ItemGroup feeds both the post-build local deploy (`DeployToModFolder` → `StageMod`, an atomic wipe+recopy of `$RIMWORLD_PATH/Mods/ArchotechThumb/`, so renamed/deleted files never linger) and the CI release, which invokes the same target with `-p:StageDir=...` so the release zip cannot drift from local deploys. Add/remove shipped files only in that ItemGroup.
 
 **WSL Setup:** Requires `RIMWORLD_PATH` env var in `~/.bashrc` pointing to the Windows RimWorld install (e.g., `/mnt/c/Program Files (x86)/Steam/steamapps/common/RimWorld`).
 

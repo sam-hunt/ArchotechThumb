@@ -22,26 +22,17 @@ jobs:
       - name: Build
         run: dotnet build ArchotechThumb.sln -c Release
 
+      - name: Stage mod files
+        run: dotnet build Source/1.6/ArchotechThumb.csproj -c Release -t:StageMod -p:StageDir=${{ github.workspace }}/release/ArchotechThumb
+
       - name: Package mod
         run: |
-          set -e
-          VERSION=${GITHUB_REF_NAME}
-          mkdir -p release/ArchotechThumb/About
-          mkdir -p release/ArchotechThumb/1.6/Assemblies
-          mkdir -p release/ArchotechThumb/1.6/Defs
-          cp About/About.xml release/ArchotechThumb/About/
-          [ -f About/ModIcon.png ] && cp About/ModIcon.png release/ArchotechThumb/About/ || true
-          [ -f About/Preview.png ] && cp About/Preview.png release/ArchotechThumb/About/ || true
-          cp LoadFolders.xml release/ArchotechThumb/
-          cp 1.6/Assemblies/ArchotechThumb.dll release/ArchotechThumb/1.6/Assemblies/
-          [ -d 1.6/Defs ] && [ "$(ls -A 1.6/Defs)" ] && cp -r 1.6/Defs/* release/ArchotechThumb/1.6/Defs/ || true
-          [ -d 1.6/Patches ] && [ "$(ls -A 1.6/Patches)" ] && cp -r 1.6/Patches release/ArchotechThumb/1.6/ || true
-          [ -d Textures ] && cp -r Textures release/ArchotechThumb/ || true
-          cd release && zip -r ../ArchotechThumb-${VERSION}.zip ArchotechThumb
+          cd release
+          zip -r ../ArchotechThumb-${GITHUB_REF_NAME}.zip ArchotechThumb
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: ArchotechThumb-${{ github.ref_name }}.zip
-          generate_release_notes: true
+          generate_release_notes: false
           prerelease: ${{ contains(github.ref_name, 'beta') || contains(github.ref_name, 'alpha') || contains(github.ref_name, '-rc') }}
