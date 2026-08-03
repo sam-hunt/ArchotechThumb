@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <ArchotechThumb_OrbitalBeamCooldown>Orbital beam strike cooldown: {0} days</ArchotechThumb_OrbitalBeamCooldown>
+  <ArchotechThumb_OrbitalBeamCooldown_Tip>How long the archotech thumb's orbital uplink takes to recharge between strikes. 0 disables the cooldown entirely.</ArchotechThumb_OrbitalBeamCooldown_Tip>
+
+</LanguageData>

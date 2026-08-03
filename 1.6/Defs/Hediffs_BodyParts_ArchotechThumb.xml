@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- Hediff: installed archotech thumb -->
+  <HediffDef ParentName="AddedBodyPartBase">
+    <defName>AT_ArchotechThumb</defName>
+    <label>archotech thumb</label>
+    <labelNoun>an archotech thumb</labelNoun>
+    <description>An installed archotech thumb. Despite its modest size it conceals an archotech subpersona, an array of forbidden communications hardware, and a direct uplink to a derelict orbital weapon platform. With a thought, the wearer can call down a column of solar fire from the heavens. Like other archotech parts, it looks and feels like natural flesh, is harder to damage than plasteel, and repairs itself over time.</description>
+    <descriptionHyperlinks>
+      <ThingDef>AT_ArchotechThumb</ThingDef>
+      <AbilityDef>AT_OrbitalBeamStrike</AbilityDef>
+    </descriptionHyperlinks>
+    <comps>
+      <li Class="HediffCompProperties_VerbGiver">
+        <tools>
+          <li>
+            <label>fist</label>
+            <capacities>
+              <li>Blunt</li>
+            </capacities>
+            <power>14</power>
+            <cooldownTime>2</cooldownTime>
+            <soundMeleeHit>MeleeHit_BionicPunch</soundMeleeHit>
+            <soundMeleeMiss>MeleeMiss_BionicPunch</soundMeleeMiss>
+          </li>
+        </tools>
+      </li>
+      <li Class="HediffCompProperties_GiveAbility">
+        <abilityDef>AT_OrbitalBeamStrike</abilityDef>
+      </li>
+    </comps>
+    <spawnThingOnRemoved>AT_ArchotechThumb</spawnThingOnRemoved>
+    <addedPartProps>
+      <solid>true</solid>
+      <partEfficiency>1.50</partEfficiency>
+      <betterThanNatural>true</betterThanNatural>
+    </addedPartProps>
+  </HediffDef>
+
+  <!-- Item: archotech thumb -->
+  <ThingDef ParentName="BodyPartArchotechBase">
+    <defName>AT_ArchotechThumb</defName>
+    <label>archotech thumb</label>
+    <description>An artificial thumb built by an archotech. Inside its tiny shell sits a subpersona AI, a bank of forbidden uplink antennae, and a permanent handshake with a long-forgotten orbital weapon platform. Once installed, the wearer can call down a power beam from orbit at will. Like other archotech parts, it is harder to damage than plasteel and repairs itself over time.</description>
+    <descriptionHyperlinks><RecipeDef>AT_InstallArchotechThumb</RecipeDef></descriptionHyperlinks>
+    <statBases>
+      <MarketValue>3640</MarketValue>
+      <Mass>4</Mass>
+    </statBases>
+    <thingSetMakerTags>
+      <li>RewardStandardCore</li>
+    </thingSetMakerTags>
+  </ThingDef>
+
+  <!-- Recipe: install archotech thumb -->
+  <RecipeDef ParentName="SurgeryInstallBodyPartArtificialBase">
+    <defName>AT_InstallArchotechThumb</defName>
+    <label>install archotech thumb</label>
+    <description>Install an archotech thumb.</description>
+    <descriptionHyperlinks>
+      <ThingDef>AT_ArchotechThumb</ThingDef>
+      <HediffDef>AT_ArchotechThumb</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Installing archotech thumb.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>AT_ArchotechThumb</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>AT_ArchotechThumb</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Shoulder</li>
+    </appliedOnFixedBodyParts>
+    <addsHediff>AT_ArchotechThumb</addsHediff>
+  </RecipeDef>
+
+</Defs>

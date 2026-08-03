@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!--
+    Insert <li>AT_ArchotechThumb</li> alongside every <li>ArchotechArm</li> in
+    the explicit reward thingDef whitelists used by vanilla map-gen / quest /
+    crate / fishing reward generators. These pools all live under various
+    ThingSetMakerDefs across Core, Anomaly, Ideology and Odyssey.
+
+    The ThingDef itself is also tagged RewardStandardCore so it is naturally
+    picked up by the broader reward generators (Reward.xml et al.) that filter
+    by thingSetMakerTagsToAllow.
+  -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs//thingDefs[li/text()='ArchotechArm']</xpath>
+    <value>
+      <li>AT_ArchotechThumb</li>
+    </value>
+  </Operation>
+
+</Patch>

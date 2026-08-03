@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <AbilityDef>
+    <defName>AT_OrbitalBeamStrike</defName>
+    <label>orbital beam strike</label>
+    <description>Call down a power beam from a derelict orbital satellite onto the chosen location. The beam ignites everything in a wide radius and inflicts massive flame damage. The archotech thumb's uplink takes time to recharge between strikes.</description>
+    <iconPath>Things/Item/Equipment/WeaponSpecial/OrbitalTargeterPowerBeam/OrbitalTargeterPowerBeam</iconPath>
+    <hotKey>Misc4</hotKey>
+    <cooldownTicksRange>1800000</cooldownTicksRange>
+    <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>true</disableGizmoWhileUndrafted>
+    <writeCombatLog>true</writeCombatLog>
+    <hostile>true</hostile>
+    <aiCanUse>false</aiCanUse>
+    <stunTargetWhileCasting>false</stunTargetWhileCasting>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>3</warmupTime>
+      <range>44.9</range>
+      <requireLineOfSight>false</requireLineOfSight>
+      <soundAiming>OrbitalTargeter_Aiming</soundAiming>
+      <soundCast>OrbitalTargeter_Fire</soundCast>
+      <onlyManualCast>true</onlyManualCast>
+      <ai_AvoidFriendlyFireRadius>15</ai_AvoidFriendlyFireRadius>
+      <targetParams>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>true</canTargetBuildings>
+        <canTargetLocations>true</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_PowerBeam">
+        <durationTicks>600</durationTicks>
+      </li>
+    </comps>
+  </AbilityDef>
+
+</Defs>
