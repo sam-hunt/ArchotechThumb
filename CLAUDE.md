@@ -20,8 +20,8 @@ dotnet build Source/1.6/ArchotechThumb.csproj
 # Stage the mod files only (atomic wipe+recopy; use when Defs/Patches are renamed or deleted)
 dotnet build Source/1.6/ArchotechThumb.csproj -t:StageMod
 
-# Run the test suite (WSL -> Windows PowerShell; net472 runner)
-./Scripts/test-windows.sh
+# Run the test suite (native; vstest hosts the net472 suite via mono)
+dotnet test Tests/1.6/ArchotechThumb.Tests.csproj
 
 # Validate localization (also a CI release gate)
 python3 Scripts/check-translations.py --strict
@@ -57,8 +57,7 @@ Tests/1.6/          # Headless xUnit (net472) suite for pure logic
 Scripts/
 ├── check-translations.py           # Deterministic localization validator (CI release gate)
 ├── refresh-translation-expectations.py  # Regenerates the sidecar via ../L10nProbe game boot
-├── expected-injections.json        # Checked-in DefInjected expectations sidecar
-└── test-windows.sh                 # Runs the net472 xUnit suite via Windows PowerShell
+└── expected-injections.json        # Checked-in DefInjected expectations sidecar
 .github/workflows/  # CI (release.yml triggers on v*.*.* tags)
 ```
 
@@ -74,7 +73,7 @@ All defs use the `AT_` prefix (Archotech Thumb).
 
 ## Testing
 
-`Tests/1.6/` holds an xUnit (net472) suite for the pure logic: `ArchotechThumbSettings` defaults, `ResetToDefaults`, and the days-to-ticks cooldown conversion. Tests are headless — anything needing `DefDatabase`/`Current.Game` (e.g. `ApplyOrbitalBeamCooldown`, the settings UI) is out of scope. Run with `./Scripts/test-windows.sh` (WSL shells out to Windows PowerShell because the net472 runner can't be hosted by WSL's dotnet). CI builds the Tests project but does not run it.
+`Tests/1.6/` holds an xUnit (net472) suite for the pure logic: `ArchotechThumbSettings` defaults, `ResetToDefaults`, and the days-to-ticks cooldown conversion. Tests are headless — anything needing `DefDatabase`/`Current.Game` (e.g. `ApplyOrbitalBeamCooldown`, the settings UI) is out of scope. Run natively with `dotnet test Tests/1.6/ArchotechThumb.Tests.csproj` — vstest hosts the net472 suite via mono. If a run fails with `BadImageFormatException`/`TypeLoadException`, a DLL is missing from the test csproj copy target (see the Assembly-CSharp-firstpass comment there): mono resolves field types eagerly where the Windows CLR is lazy. CI builds the Tests project but does not run it.
 
 ## Localization
 
