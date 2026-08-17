@@ -56,6 +56,14 @@ the source of truth; every other language derives from it.
   Base` vanilla parent defs these four ParentName-chain onto.
 - Target layout: `1.6/Languages/<Language>/Keyed/*.xml` and
   `1.6/Languages/<Language>/DefInjected/<DefTypeFolder>/*.xml`.
+- This mod has no gated compat load root today (no `MayRequire`-gated defs,
+  no `1.6/Mods/<Name>/` folders), so every translation lives under the plain
+  `1.6/Languages/<Language>/` tree above. If one is ever added — following
+  the `1.6/Mods/<Mod Name>/{Defs,Languages}/<Language>/...` convention (see
+  `../BetterTradersGuild`'s `UniqueMeleeWeapons`/`Biotech` roots) — its
+  translations live under that root's own `Languages/<Language>/`, never the
+  main tree; the checker (`check_entry_root`) and the csproj's `StageMod`
+  globs already handle a root shaped that way.
 - `<DefTypeFolder>` must be the def's resolvable type name: bare for vanilla
   types. This mod's own four defs are all vanilla types (`AbilityDef`,
   `HediffDef`, `ThingDef`, `RecipeDef`) — none of them subclass a custom C#
@@ -100,7 +108,15 @@ the source of truth; every other language derives from it.
   by `Scripts/refresh-translation-expectations.py` (launches the game with
   the `../L10nProbe` dev mod). The checker enforces the sidecar's `required`
   subset per language and fails on stale expectations, so new content of
-  *any* shape forces a regen rather than a manifest edit.
+  *any* shape forces a regen rather than a manifest edit. **Enumerate the
+  DefInjected surface from the sidecar's `required` entries, not from
+  `1.6/Defs/`'s `<label>`/`<description>` fields** — this mod has no English
+  DefInjected tree to enumerate from either, so the sidecar is the only
+  authority. Take the English source text for each entry from the sidecar's
+  own `"english"` field rather than re-reading it off the def XML: it is
+  also what the checker compares `<!-- EN: -->` comments against, so
+  sourcing EN comments from it programmatically makes drift impossible, and
+  it is the only place a nested-`comps` field's text is unambiguous.
 - **EN comment convention (required):** every translated entry carries the
   current English source directly above it:
   `<!-- EN: Reset to defaults -->` — this is how the checker detects
