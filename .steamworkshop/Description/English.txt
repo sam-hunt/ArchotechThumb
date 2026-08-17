@@ -1,0 +1,17 @@
+Archotech Thumb
+
+[h1]About[/h1]
+Adds an archotech thumb, a tiny prosthetic that conceals an archotech subpersona and an uplink to a derelict orbital weapon platform.
+
+[hr][/hr]
+[h2]What it does[/h2]
+[list]
+[*]Install the archotech thumb via surgery to grant the orbital beam strike ability, a callable orbital power beam
+[*]Cooldown between strikes is configurable in mod settings
+[*]Like other archotech parts, it looks and feels natural, resists damage, and repairs itself over time
+[*]Slotted into vanilla and DLC archotech reward pools alongside the archotech eye, arm, and leg
+[/list]
+
+[hr][/hr]
+[h1]Compatibility[/h1]
+Requires Harmony. No other dependencies.

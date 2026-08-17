@@ -34,6 +34,12 @@ the source of truth; every other language derives from it.
   slider, reset button) and any other player-facing prose this mod owns
   outside its Defs. Unlike the trader-mod sibling, there is no second Keyed
   file to split out.
+- `ArchotechThumb_SettingsCategory` is not an ordinary settings-window
+  label: it is that language's localized Steam Workshop title, and must
+  stay in sync with the title line (line 1) of
+  `.steamworkshop/Description/<Language>.txt` — always translate and update
+  the two together (see `.steamworkshop/README.md` and the CLAUDE.md
+  localization note). English keeps `Archotech Thumb` in both.
 - **This mod ships its own Defs**, unlike the trader-mod sibling
   (`../TradersStockXenogerms`), which patches vanilla defs and has no
   DefInjected surface at all. `1.6/Defs/*.xml` defines four real defs with
