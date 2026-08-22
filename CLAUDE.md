@@ -71,6 +71,8 @@ All defs use the `AT_` prefix (Archotech Thumb).
 
 **Namespace Convention:** Use `*Patches` suffix for patch namespaces to avoid RimWorld type conflicts (e.g., `ArchotechThumb.Patches`).
 
+**Patch-timing hazard (other mods' methods):** `Harmony.PatchAll()` runs from the `Mod` subclass constructor — BEFORE any defs are loaded. Applying a detour JIT-compiles the target and runs its declaring type's static ctor, so a patch targeting ANOTHER MOD's method can permanently break that mod when its cctor resolves defs (the BetterTradersGuild v1.1.0 CWTL incident). `Source/1.6/Patches/` is currently empty; when the first patch classes land, keep foreign-target patches off the ctor-time pass — worked example: BetterTradersGuild's `Core/DeferredModPatches.cs`.
+
 ## Testing
 
 `Tests/1.6/` holds an xUnit (net472) suite for the pure logic: `ArchotechThumbSettings` defaults, `ResetToDefaults`, and the days-to-ticks cooldown conversion. Tests are headless — anything needing `DefDatabase`/`Current.Game` (e.g. `ApplyOrbitalBeamCooldown`, the settings UI) is out of scope. Run natively with `dotnet test Tests/1.6/ArchotechThumb.Tests.csproj` — vstest hosts the net472 suite via mono. If a run fails with `BadImageFormatException`/`TypeLoadException`, a DLL is missing from the test csproj copy target (see the Assembly-CSharp-firstpass comment there): mono resolves field types eagerly where the Windows CLR is lazy. CI builds the Tests project but does not run it.
