@@ -77,6 +77,8 @@ All defs use the `AT_` prefix (Archotech Thumb).
 
 `Tests/1.6/` holds an xUnit (net472) suite for the pure logic: `ArchotechThumbSettings` defaults, `ResetToDefaults`, and the days-to-ticks cooldown conversion. Tests are headless — anything needing `DefDatabase`/`Current.Game` (e.g. `ApplyOrbitalBeamCooldown`, the settings UI) is out of scope. Run natively with `dotnet test Tests/1.6/ArchotechThumb.Tests.csproj` — vstest hosts the net472 suite via mono. If a run fails with `BadImageFormatException`/`TypeLoadException`, a DLL is missing from the test csproj copy target (see the Assembly-CSharp-firstpass comment there): mono resolves field types eagerly where the Windows CLR is lazy. CI builds the Tests project but does not run it.
 
+**Startup smoke test (pre-release):** `python3 Scripts/integration-smoke-test.py` (game closed) boots the mod on its pinned minimal list, then classifies Player.log errors by origin and fails on anything attributed to this mod. Run before every release (wired into the release skill); thin shim over the shared engine in `l10n/smoke/` (born from the BetterTradersGuild v1.1.0 CWTL incident).
+
 ## Localization
 
 English (`1.6/Languages/English/Keyed/ArchotechThumb.xml`, `ArchotechThumb_` prefix) is the source of truth; the mod also ships Defs, so non-English languages need `DefInjected` files too. This mod's facts and coined-term glossaries live in the `translate` skill (`glossary/<Language>.md` beside it); the contributor-facing rules and the language roster (English only so far) live in `CONTRIBUTING.md` and must move in the same commit as any language change.
