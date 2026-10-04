@@ -98,4 +98,4 @@ Use the `rimworld-logs` skill — it covers Player.log locations (Windows/WSL/Li
 
 ## Releases
 
-Tag a `v*.*.*` push and the GitHub Actions release workflow builds, packages, and publishes a zip. The `/release` slash command (in `.claude/skills/release/SKILL.md`) walks through version bump → changelog → build → tag → push.
+Tag a `v*.*.*` push and the GitHub Actions release workflow builds, packages, and publishes a zip. The `/release` slash command (in `.claude/skills/release/SKILL.md`) walks through version bump → changelog → build → tag → push. Release candidates are `X.Y.Z-rc.N` tags (the `v*.*.*` glob still matches them): CHANGELOG-less and Workshop-less, with the suffix only in `modVersion` and `AssemblyInformationalVersion`; `release.yml` treats any suffixed tag as a prerelease to match, and the skill measures every range from the last *stable* tag.
